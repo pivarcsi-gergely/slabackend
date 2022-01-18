@@ -18,7 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->date('birthday');
+            $table->integer('account_number');
+            $table->integer('card_count');
+            $table->integer('fighter_count');
+            $table->integer('level');
+            $table->boolean('admin');
+            $table->boolean('banned');
             $table->timestamp('created_at');
         });
     }
