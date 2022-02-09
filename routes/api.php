@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/cards', CardController::class);
-Route::resource('/fighters', FighterController::class);
+Route::apiResource('/cards', CardController::class);
+Route::apiResource('/fighters', FighterController::class);
