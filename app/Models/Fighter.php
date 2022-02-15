@@ -16,6 +16,5 @@ class Fighter extends Model
         'level',
         'hp',
         'attack',
-        'summon_cost',
     ];
 }
