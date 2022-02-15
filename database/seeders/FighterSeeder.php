@@ -23,7 +23,7 @@ class FighterSeeder extends Seeder
             'attack' => 0]);
 
         Fighter::create([
-            'name' => "",
+            'name' => "Don",
             'type' => "",
             'details' => "For 2 turns, you gain 15% extra attack by expending 15% of your current health. It's cooldown is 2 turns.",
             'level' => 1,
@@ -31,7 +31,7 @@ class FighterSeeder extends Seeder
             'attack' => 100]);
 
         Fighter::create([
-            'name' => "Victor",
+            'name' => "Karl",
             'type' => "",
             'details' => "Your card's stats are decreased by 15%, but they also cost 20% less.",
             'level' => 1,
@@ -39,7 +39,7 @@ class FighterSeeder extends Seeder
             'attack' => 100]);
 
         Fighter::create([
-            'name' => "Victor",
+            'name' => "Shean",
             'type' => "",
             'details' => "Whenever you're under max hp, you gain 5% of max hp back every turn.",
             'level' => 1,
