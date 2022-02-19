@@ -20,8 +20,7 @@ class FighterFactory extends Factory
             'details' => $this->faker->words(4,true),
             'level' => $this->faker->numberBetween(1,100),
             'hp' => $this->faker->numberBetween(1,100),
-            'attack' => $this->faker->numberBetween(1,100),
-            'summon_cost' => $this->faker->numberBetween(1,100),
+            'attack' => $this->faker->numberBetween(1,100)
         ];
     }
 }
