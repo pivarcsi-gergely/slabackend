@@ -15,10 +15,8 @@ class CreateGameTable extends Migration
     {
         Schema::create('game', function (Blueprint $table) {
             $table->integer('id');
-            $table->integer('userid');
-            $table->foreign('userid')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('fighterid');
-            $table->foreign('fighterid')->references('id')->on('fighters')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('userid')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('fighterid')->references('id')->on('fighters')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
