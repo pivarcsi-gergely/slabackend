@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rules;
 
 class LoginRequest extends FormRequest
 {
@@ -29,8 +30,11 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'username' => ['required', 'string', 'min:3', 'max:50'],
+            'email' => 'required|email:rfc',
+            'password' => 'required|confirmed|current_password:api',
+            'email' => ['required', 'string', 'email:rfc'],
+            'password' => ['required', 'confirmed', 'current_password:api', Rules\Password::defaults()],
         ];
     }
 
