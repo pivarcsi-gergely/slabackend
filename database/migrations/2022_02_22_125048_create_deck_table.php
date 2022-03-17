@@ -14,8 +14,10 @@ class CreateDeckTable extends Migration
     public function up()
     {
         Schema::create('deck', function (Blueprint $table) {
-            $table->integer('gameid')->references('id')->on('game')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('cardid')->references('id')->on('cards')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('gameid');
+            $table->integer('cardid');
+            $table->foreign('gameid')->references('id')->on('game')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('cardid')->references('id')->on('cards')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
