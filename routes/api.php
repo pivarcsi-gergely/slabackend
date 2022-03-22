@@ -27,3 +27,4 @@ Route::get('/fighters', [FighterController::class, "index"]);
 Route::get('/fighters/{fighter}', [FighterController::class, "show"]);
 Route::get('/users', [UserController::class, "index"]);
 Route::get('/users/{user}', [UserController::class, "show"]);
+Route::post('/register', [UserController::class, 'register']);
