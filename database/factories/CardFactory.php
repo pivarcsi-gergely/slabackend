@@ -20,7 +20,7 @@ class CardFactory extends Factory
             'level' => $this->random(),
             'hp' => $this->random(),
             'attack' => $this->random(),
-            'summon_cost' => $this->random(),
+            
         ];
     }
 }
