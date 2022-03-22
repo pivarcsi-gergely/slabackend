@@ -4,27 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Token;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function register(Request $request) 
+    public function login(Request $request)
     {
-        $user = new User();
-        $user->name->$request->input('name');
-        $user->email->$request->input('email');
-        $user->password=Hash::make($request->input('password'));
-        $user->save();
-        return $request->input();
+        $validatedReq = $request->validate([
+            'username' => 'required|string|min:3|max:50',
+            'password' => 'required|confirmed|current_password:api'
+        ]);
+
+        $toBeValidatedUser =  User::where('username', $validatedReq['username'])->first();
+
+        if (!$toBeValidatedUser) {
+            return response([
+                'message' => 'Nem megfelelő a felhasználónév!'
+            ]);
+        }
+        if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
+            return response([
+                'message' => 'Helytelen jelszó!'
+            ]);
+        }
+
+        $token = Token::createToken();
+
+        return $token;
     }
+
     public function index()
     {
         $users = User::all();
         return response()->json($users);
     }
-    public function create()
-    {
-    }
+
     public function store(Request $request)
     {
         $user = new User();
@@ -32,12 +47,10 @@ class UserController extends Controller
         $user->save();
         return response()->json($user, 201);
     }
+
     public function show(User $user)
     {
         return response()->json($user);
-    }
-    public function edit(User $user)
-    {
     }
     public function update(Request $request, User $user)
     {
