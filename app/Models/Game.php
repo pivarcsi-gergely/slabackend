@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fighter extends Model
+class Game extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'type',
-        'details',
-        'level',
-        'hp',
-        'attack',
+        'id',
+        'userid',
+        'fighterid'
     ];
 }

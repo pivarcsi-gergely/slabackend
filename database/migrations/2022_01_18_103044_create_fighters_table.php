@@ -21,7 +21,6 @@ class CreateFightersTable extends Migration
             $table->integer('level');
             $table->integer('hp');
             $table->integer('attack');
-            $table->integer('summon_cost');
             $table->timestamps();
         });
     }
