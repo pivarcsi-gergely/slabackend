@@ -34,8 +34,15 @@ class UserController extends Controller
         return $token;
     }
 
-    public function register(Request $request)
+    public function index()
     {
+        $users = User::all();
+        return response()->json($users);
+    }
+
+    public function store(Request $request)
+    {
+
         $validatedReq = $request->validate([
             'username' => 'required|string|min:3|max:50',
             'password' => 'required|confirmed|current_password:api'
@@ -45,20 +52,6 @@ class UserController extends Controller
         $user->name = $validatedReq['username'];
         $user->email = $validatedReq['email'];
         $user->password = Hash::make($validatedReq['password']);
-        
-        return $request->input();
-    }
-
-    public function index()
-    {
-        $users = User::all();
-        return response()->json($users);
-    }
-
-    public function store(Request $request)
-    {
-        $user = new User();
-        $user->fill($request->all());
         $user->save();
         return response()->json($user, 201);
     }
