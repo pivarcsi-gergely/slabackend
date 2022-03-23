@@ -34,12 +34,18 @@ class UserController extends Controller
         return $token;
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
+        $validatedReq = $request->validate([
+            'username' => 'required|string|min:3|max:50',
+            'password' => 'required|confirmed|current_password:api'
+        ]);
+
         $user = new User();
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->password=Hash::make($request->input('password'));
-        
+        $user->name = $validatedReq['username'];
+        $user->email = $validatedReq['email'];
+        $user->password = Hash::make($validatedReq['password']);
+        $user->save();
         return $request->input();
     }
 

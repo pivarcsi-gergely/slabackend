@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('/cards', CardController::class)->middleware('token');
+Route::resource('/fighters', FighterController::class)->middleware('token');
+Route::resource('/users', UserController::class)->middleware('token');
 
 Route::get('/cards', [CardController::class, "index"]);
 Route::get('/cards/{card}', [CardController::class, "show"]);
