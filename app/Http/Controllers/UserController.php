@@ -45,7 +45,7 @@ class UserController extends Controller
         $user->name = $validatedReq['username'];
         $user->email = $validatedReq['email'];
         $user->password = Hash::make($validatedReq['password']);
-        $user->save();
+        
         return $request->input();
     }
 
