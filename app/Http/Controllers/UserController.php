@@ -20,12 +20,12 @@ class UserController extends Controller
 
         if (!$toBeValidatedUser) {
             return response([
-                'message' => 'Nem megfelelő a felhasználónév!'
+                'message' => 'Invalid username or password!'
             ]);
         }
         if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
             return response([
-                'message' => 'Helytelen jelszó!'
+                'message' => 'Invalid username or password!'
             ]);
         }
 
