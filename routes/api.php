@@ -21,10 +21,5 @@ Route::resource('/cards', CardController::class)->middleware('token');
 Route::resource('/fighters', FighterController::class)->middleware('token');
 Route::resource('/users', UserController::class)->middleware('token');
 
-Route::get('/cards', [CardController::class, "index"]);
-Route::get('/cards/{card}', [CardController::class, "show"]);
-Route::get('/fighters', [FighterController::class, "index"]);
-Route::get('/fighters/{fighter}', [FighterController::class, "show"]);
-Route::get('/users', [UserController::class, "index"]);
-Route::get('/users/{user}', [UserController::class, "show"]);
-Route::post('/register', [UserController::class, 'register']);
+Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/users/register', [UserController::class, 'store']);
