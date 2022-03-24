@@ -24,10 +24,10 @@ class Token extends Model
         return $token;
     }
 
-    static function findUserbyToken(Token $token): User|false
+    static function findUserbyToken(string $key): User|false
     {
         try {
-            return User::where("id", $token->userid)->firstOrFail();
+            return User::where("id", Token::getTokenByKey($key))->firstOrFail();
         } catch (Error $e) {
             return false;
         }

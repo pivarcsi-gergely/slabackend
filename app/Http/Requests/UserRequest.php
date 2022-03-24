@@ -26,8 +26,8 @@ class UserRequest extends FormRequest
         return [
             'username' => 'required|string|min:3|max:50',
             'email' => 'required|email:rfc',
-            'password' => 'required|confirmed|current_password:api',
-            'account_number' => 'required|unique'
+            'password' => 'required|confirmed|regex:/^\p{Lu}\p{L}{8,50}$/',
+            'account_number' => 'unique'
         ];
     }
 }
