@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/users/register', [UserController::class, 'store']);
+
 Route::resource('/cards', CardController::class);
 Route::resource('/fighters', FighterController::class);
 Route::resource('/users', UserController::class)->middleware('token');
-
-Route::post('/users/login', [UserController::class, 'login']);
-Route::post('/users/register', [UserController::class, 'store']);
