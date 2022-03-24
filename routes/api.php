@@ -21,5 +21,8 @@ Route::resource('/cards', CardController::class)->middleware('token');
 Route::resource('/fighters', FighterController::class)->middleware('token');
 Route::resource('/users', UserController::class)->middleware('token');
 
+
+
+
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/users/register', [UserController::class, 'store']);

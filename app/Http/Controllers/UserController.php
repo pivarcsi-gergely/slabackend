@@ -20,18 +20,18 @@ class UserController extends Controller
 
         if (!$toBeValidatedUser) {
             return response([
-                'message' => 'Nem megfelelő a felhasználónév!'
+                'message' => 'Helytelen felhasználónév vagy jelszó!'
             ]);
         }
         if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
             return response([
-                'message' => 'Helytelen jelszó!'
+                'message' => 'Helytelen felhasználónév vagy jelszó!'
             ]);
         }
 
         $token = Token::createToken();
 
-        return $token;
+        return $toBeValidatedUser;
     }
 
     public function index()
