@@ -16,7 +16,6 @@ class UserController extends Controller
     {
         $user =  User::firstWhere('username', $request->username);
 
-        //Csak ki szeretném törölni a már meglévő token-eket
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Invalid username or password!'
