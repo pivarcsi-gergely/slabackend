@@ -23,7 +23,7 @@ class UserController extends Controller
 
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
-                'message' => 'Invalid username or password!' . User::find($request->username)
+                'message' => 'Invalid username or password!'
             ], 404);
         }
 
