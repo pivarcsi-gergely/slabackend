@@ -25,7 +25,7 @@ class Token extends Model
 
     static function getTokenByKey(string $key): Token|false
     {
-        $token = Token::where("api_token", $key)->first();
+        $token = Token::firstWhere("api_token", $key);
         if (!isset($token->id)) {
             $token = false;
         }
@@ -35,7 +35,7 @@ class Token extends Model
     static function findUserbyToken(string $key): User|false
     {
         try {
-            return User::where("id", Token::getTokenByKey($key))->firstOrFail();
+            return User::firstWhere("id", Token::getTokenByKey($key));
         } catch (Error $e) {
             return false;
         }
