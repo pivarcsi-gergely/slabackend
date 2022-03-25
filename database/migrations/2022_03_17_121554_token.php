@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class Token extends Migration
 {
-    public function up(){
+    public function up()
+    {
         Schema::create('token', function (Blueprint $table) {
             $table->integer('userid')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('api_token', 80)->unique()->nullable()->default(null);
+            $table->timestamps();
         });
     }
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('token');
     }
 }

@@ -10,9 +10,17 @@ class Token extends Model
 {
     protected $table = "token";
 
-    static function createToken(): string
+    protected $fillable = [
+        'userid',
+        'api_token'
+    ];
+
+    static function createToken(int $id): Token
     {
-        return Str::random(80);
+        return Token::create([
+            'userid' => $id,
+            'api_token' => Str::random(80)
+        ]);
     }
 
     static function getTokenByKey(string $key): Token|false

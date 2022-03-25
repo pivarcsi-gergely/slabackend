@@ -27,7 +27,7 @@ class UserController extends Controller
             ], 404);
         }
 
-        $token = Token::createToken();
+        $token = Token::createToken($user->id);
         //$tokenKeyUser = Token::findUserbyToken($token);
 
         return response()->json(['message' => "You've logged in"]);
