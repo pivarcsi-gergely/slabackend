@@ -16,6 +16,12 @@ class UserController extends Controller
     {
         $user =  User::firstWhere('username', $request->username);
 
+        $deletableToken = User::findTokenByUser($user->userid);
+
+        if ($deletableToken) {
+            $deletableToken->delete();
+        }
+
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Invalid username or password!'
