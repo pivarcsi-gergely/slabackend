@@ -19,13 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at');
             $table->string('password');
-            $table->string('remember_token');
-            $table->integer('account_number');
-            $table->integer('card_count');
-            $table->integer('fighter_count');
-            $table->integer('level');
-            $table->boolean('admin');
-            $table->boolean('banned');
+            $table->string('remember_token')->default('aaaaa');
+            $table->integer('account_number')->nullable();
+            $table->integer('card_count')->default('8');
+            $table->integer('fighter_count')->default('1');
+            $table->integer('level')->default('1');
+            $table->boolean('admin')->default('0');
+            $table->boolean('banned')->default('0');
             $table->timestamps();
         });
     }

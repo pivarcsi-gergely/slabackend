@@ -19,14 +19,23 @@ class UserController extends Controller
             'Authorization' => 'Bearer'
         ]);*/
 
-        $validator = Validator::make($request->all(), (new UserRequest())->rules());
-        if ($validator->fails()) {
-            $errormsg = "";
-            foreach ($validator->errors()->all() as $error) {
-                $errormsg .= $error . " ";
-            }
-            $errormsg = trim($errormsg);
-            return response()->json($errormsg, 400);
+        $validatedReq = $request->validate([
+            'username' => 'required|string',
+            //'email' => 'required|email:rfc',
+            'password' => 'required'
+        ]);
+
+        $toBeValidatedUser =  User::where('username', $validatedReq['username'])->first();
+
+        if (!$toBeValidatedUser) {
+            return response([
+                'message' => 'Invalid username or password!'
+            ]);
+        }
+        if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
+            return response([
+                'message' => 'Invalid username or password!'
+            ]);
         }
 
         $token = Token::createToken();
@@ -41,20 +50,15 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $validator = Validator::make($request->all(), (new UserRequest())->rules());
-        if ($validator->fails()) {
-            $errormsg = "";
-            foreach ($validator->errors()->all() as $error) {
-                $errormsg .= $error . " ";
-            }
-            $errormsg = trim($errormsg);
-            return response()->json($errormsg, 400);
-        }
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        $user = new User();
-        $user->fill($request->all());
+
         $user->save();
         return response()->json($user, 201);
     }
