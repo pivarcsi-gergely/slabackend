@@ -19,29 +19,18 @@ class UserController extends Controller
             'Authorization' => 'Bearer'
         ]);*/
 
-        $validatedReq = $request->validate([
-            'username' => 'required|string',
-            //'email' => 'required|email:rfc',
-            'password' => 'required'
-        ]);
+        $user =  User::firstWhere('username', $request->username);
 
-        $toBeValidatedUser =  User::where('username', $validatedReq['username'])->first();
-
-        if (!$toBeValidatedUser) {
+        if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
-                'message' => 'Invalid username or password!'
-            ]);
-        }
-        if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
-            return response([
-                'message' => 'Invalid username or password!'
-            ]);
+                'message' => 'Invalid username or password!' . User::find($request->username)
+            ], 404);
         }
 
         $token = Token::createToken();
-        $user = Token::findUserbyToken($token);
+        //$tokenKeyUser = Token::findUserbyToken($token);
 
-        return response()->json();
+        return response()->json(['message' => "You've logged in"]);
     }
 
     public function index()
