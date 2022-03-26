@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Token;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $validatedReq = $request->validate([
-            'username' => 'required|string|min:3|max:50',
-            'password' => 'required|confirmed|current_password:api'
-        ]);
+        $user =  User::firstWhere('username', $request->username);
 
-        $toBeValidatedUser =  User::where('username', $validatedReq['username'])->first();
+        $deletableToken = User::findTokenByUser($user->userid);
 
-        if (!$toBeValidatedUser) {
-            return response([
-                'message' => 'Helytelen felhasználónév vagy jelszó!'
-            ]);
-        }
-        if (!Hash::check($validatedReq['password'], $toBeValidatedUser->password)) {
-            return response([
-                'message' => 'Helytelen felhasználónév vagy jelszó!'
-            ]);
+        if ($deletableToken) {
+            $deletableToken->delete();
         }
 
-        $token = Token::createToken();
+        if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => 'Invalid username or password!'
+            ], 404);
+        }
 
-        return $toBeValidatedUser;
+        $token = Token::createToken($user->id);
+        //$tokenKeyUser = Token::findUserbyToken($token);
+
+        return response()->json(['message' => "You've logged in"]);
     }
 
     public function index()
@@ -40,32 +40,44 @@ class UserController extends Controller
         return response()->json($users);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-
-        $validatedReq = $request->validate([
-            'username' => 'required|string|min:3|max:50',
-            'password' => 'required|confirmed|current_password:api'
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
-        $user = new User();
-        $user->name = $validatedReq['username'];
-        $user->email = $validatedReq['email'];
-        $user->password = Hash::make($validatedReq['password']);
+
         $user->save();
         return response()->json($user, 201);
     }
 
-    public function show(User $user)
+    public function show(int $id)
     {
+        $user = User::find($id);
+        if (is_null($user)) {
+            return response()->json([
+                'message' => 'User not found!'
+            ]);
+        }
         return response()->json($user);
     }
-    public function update(Request $request, User $user)
+    public function update(Request $request, int $id)
     {
+        $user = User::find($id);
+
+        if (is_null($id)) {
+            return response()->json([
+                'message' => 'Error updating the User'
+            ]);
+        }
+
         $user->fill($request->all());
         $user->save();
         return response()->json($user, 200);
     }
+
     public function destroy(int $id)
     {
         User::destroy($id);

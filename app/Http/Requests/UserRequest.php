@@ -24,10 +24,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string|min:3|max:50',
-            'email' => 'required|email:rfc',
-            'password' => 'required|confirmed|current_password:api',
-            'account_number' => 'required|unique'
+            'username' => 'required|string|min:3|max:50|unique:users',
+            'email' => 'required|email:rfc|unique:users',
+            'password' => ['required', 'confirmed', 'regex:/^([[:upper:]]|\w){8,50}$/u']
         ];
     }
 }

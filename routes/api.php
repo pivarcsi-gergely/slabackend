@@ -3,7 +3,6 @@
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\FighterController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::resource('/cards', CardController::class)->middleware('token');
 Route::resource('/fighters', FighterController::class)->middleware('token');
 Route::resource('/users', UserController::class)->middleware('token');
@@ -24,5 +24,11 @@ Route::resource('/users', UserController::class)->middleware('token');
 
 
 
+=======
+>>>>>>> baf7875213908e7a27b7fa5182dedabcbcafc799
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/users/register', [UserController::class, 'store']);
+
+Route::apiResource('/cards', CardController::class);
+Route::apiResource('/fighters', FighterController::class);
+Route::apiResource('/users', UserController::class);

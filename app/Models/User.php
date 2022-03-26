@@ -25,12 +25,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-   public $timestamps = false; 
+    public $timestamps = false;
 
-    static function findTokenByUser(User $user): User|false
+    static function findTokenByUser($id): Token|false
     {
         try {
-            return Token::where("userid", $user->user_id)->firstOrFail();
+            return Token::firstWhere("userid", $id);
         } catch (Error $e) {
             return false;
         }
