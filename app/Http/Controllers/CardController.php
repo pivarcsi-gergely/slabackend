@@ -22,12 +22,15 @@ class CardController extends Controller
         $card->save();
         return response()->json($card, 201);
     }
-    public function show(Card $card)
+    public function show(int $id)
     {
+        $card = Card::find($id);
+        if (is_null($card)) {
+            return response()->json([
+                'message' => 'Card not found!'
+            ]);
+        }
         return response()->json($card);
-    }
-    public function edit(Card $card)
-    {
     }
     public function update(Request $request, Card $card)
     {

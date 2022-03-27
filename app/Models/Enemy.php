@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Enemy extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class Card extends Model
         'details',
         'level',
         'hp',
-        'attack',
+        'attack'
     ];
 }

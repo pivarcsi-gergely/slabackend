@@ -7,14 +7,11 @@ use Illuminate\Http\Request;
 
 class DeckController extends Controller
 {
-    
+
     public function index()
     {
         $decks = Deck::all();
         return response()->json($decks);
-    }
-    public function create()
-    {
     }
     public function store(Request $request)
     {
@@ -26,9 +23,6 @@ class DeckController extends Controller
     public function show(Deck $deck)
     {
         return response()->json($deck);
-    }
-    public function edit(Deck $deck)
-    {
     }
     public function update(Request $request, Deck $deck)
     {

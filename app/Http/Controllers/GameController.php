@@ -12,9 +12,6 @@ class GameController extends Controller
         $games = Game::all();
         return response()->json($games);
     }
-    public function create()
-    {
-    }
     public function store(Request $request)
     {
         $game = new Game();
@@ -25,9 +22,6 @@ class GameController extends Controller
     public function show(Game $game)
     {
         return response()->json($game);
-    }
-    public function edit(Game $game)
-    {
     }
     public function update(Request $request, Game $game)
     {
