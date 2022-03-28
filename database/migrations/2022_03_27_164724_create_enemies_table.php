@@ -13,7 +13,7 @@ class CreateEnemyTable extends Migration
      */
     public function up()
     {
-        Schema::create('enemy', function (Blueprint $table) {
+        Schema::create('enemies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('type');

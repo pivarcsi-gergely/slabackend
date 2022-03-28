@@ -21,7 +21,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 250,
             'attack' => 450,
-            'summon_cost' => 600,
+            
         ]);
         Card::create([
             'name' => "Francis",
@@ -30,7 +30,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 1000,
             'attack' => 150,
-            'summon_cost' => 600,
+           
         ]);
         Card::create([
             'name' => "Alejandro",
@@ -39,7 +39,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 400,
             'attack' => 200,
-            'summon_cost' => 450,
+            
         ]);
         Card::create([
             'name' => "Cecilia",
@@ -48,7 +48,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 150,
             'attack' => 350,
-            'summon_cost' => 400,
+            
         ]);
         Card::create([
             'name' => "Footman",
@@ -57,7 +57,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 100,
             'attack' => 0,
-            'summon_cost' => 100,
+            
         ]);
         Card::create([
             'name' => "Chloe",
@@ -66,7 +66,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 550,
             'attack' => 50,
-            'summon_cost' => 350,
+           
         ]);
         Card::create([
             'name' => "Catapult",
@@ -75,7 +75,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 150,
             'attack' => 100,
-            'summon_cost' => 200,
+            
         ]);
         Card::create([
             'name' => "Mad Dog",
@@ -84,7 +84,7 @@ class CardSeeder extends Seeder
             'level' => 1,
             'hp' => 200,
             'attack' => 100,
-            'summon_cost' => 200,
+            
         ]);
     }
 }
