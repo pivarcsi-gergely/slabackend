@@ -22,12 +22,15 @@ class FighterController extends Controller
         $fighter->save();
         return response()->json($fighter, 201);
     }
-    public function show(Fighter $fighter)
+    public function show(int $id)
     {
+        $fighter = Fighter::find($id);
+        if (is_null($fighter)) {
+            return response()->json([
+                'message' => 'Fighter not found!'
+            ]);
+        }
         return response()->json($fighter);
-    }
-    public function edit(Fighter $fighter)
-    {
     }
     public function update(Request $request, Fighter $fighter)
     {
