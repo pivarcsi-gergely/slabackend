@@ -16,11 +16,11 @@ class UserController extends Controller
     {
         $user =  User::firstWhere('username', $request->username);
 
-        $deletableToken = User::findTokenByUser($user->userid);
+        /*$deletableToken = User::findTokenByUser($user->userid);
 
         if ($deletableToken) {
             $deletableToken->delete();
-        }
+        }*/
 
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
@@ -32,6 +32,42 @@ class UserController extends Controller
         //$tokenKeyUser = Token::findUserbyToken($token);
 
         return response()->json(['message' => "You've logged in"]);
+    }
+
+    public function banUser(int $id)
+    {
+        $user = User::firstWhere('id', $id);
+
+        if (isset($user)) {
+            return response()->json([
+                'message' => "A user with this id doesnt exist."
+            ]);
+        }
+
+        $user->banned = 1;
+        $user->save();
+
+        return response()->json([
+            'message' => "The user has been banned!"
+        ]);
+    }
+
+    public function unbanUser(int $id)
+    {
+        $user = User::firstWhere('id', $id);
+
+        if (isset($user)) {
+            return response()->json([
+                'message' => "A user with this id doesnt exist."
+            ]);
+        }
+
+        $user->banned = 0;
+        $user->save();
+
+        return response()->json([
+            'message' => "The user has been unbanned!"
+        ]);
     }
 
     public function index()
