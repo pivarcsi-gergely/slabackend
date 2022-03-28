@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/users/login', [UserController::class, 'login']);
-Route::post('/users/register', [UserController::class, 'store'])
+Route::post('/users/register', [UserController::class, 'store']);
 
 Route::apiResource('/cards', CardController::class);
 Route::apiResource('/fighters', FighterController::class);
