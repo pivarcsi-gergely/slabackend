@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/users/login', [UserController::class, 'login']);
 Route::post('/users/register', [UserController::class, 'store']);
+Route::post('/users/{id}/ban', [UserController::class, 'banUser']);
+Route::post('/users/{id}/unban', [UserController::class, 'unbanUser']);
 
 Route::apiResource('/cards', CardController::class);
 Route::apiResource('/fighters', FighterController::class);

@@ -38,10 +38,10 @@ class UserController extends Controller
     {
         $user = User::firstWhere('id', $id);
 
-        if (isset($user)) {
+        if (!isset($user)) {
             return response()->json([
                 'message' => "A user with this id doesnt exist."
-            ]);
+            ], 404);
         }
 
         $user->banned = 1;
@@ -56,10 +56,10 @@ class UserController extends Controller
     {
         $user = User::firstWhere('id', $id);
 
-        if (isset($user)) {
+        if (!isset($user)) {
             return response()->json([
                 'message' => "A user with this id doesnt exist."
-            ]);
+            ], 404);
         }
 
         $user->banned = 0;
