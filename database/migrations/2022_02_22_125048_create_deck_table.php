@@ -15,7 +15,8 @@ class CreateDeckTable extends Migration
      */
     public function up()
     {
-        Schema::create('deck', function (Blueprint $table) {
+        Schema::create('decks', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(Game::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignIdFor(Card::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             //$table->integer('gameid')->references('id')->on('game')->onUpdate('cascade')->onDelete('cascade');
