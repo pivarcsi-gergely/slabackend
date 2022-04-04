@@ -12,13 +12,7 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $user =  User::firstWhere('username', $request->username);
-
-        /*$deletableToken = User::findTokenByUser($user->userid);
-
-        if ($deletableToken) {
-            $deletableToken->delete();
-        }*/
+        $user = User::firstWhere('username', $request->username);
 
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
@@ -26,8 +20,13 @@ class UserController extends Controller
             ], 404);
         }
 
-        $token = Token::createToken($user->id);
-        //$tokenKeyUser = Token::findUserbyToken($token);
+        if ($user->banned == 1) {
+             return response([
+                'message' => 'You are banned!'
+            ], 404);
+        }
+
+        Token::createToken($user->id);
 
         return response()->json(['message' => "You've logged in"]);
     }
@@ -38,7 +37,7 @@ class UserController extends Controller
 
         if (!isset($user)) {
             return response()->json([
-                'message' => "A user with this id doesnt exist."
+                'message' => "A user with this id doesn't exist."
             ], 404);
         }
 
@@ -56,7 +55,7 @@ class UserController extends Controller
 
         if (!isset($user)) {
             return response()->json([
-                'message' => "A user with this id doesnt exist."
+                'message' => "A user with this id doesn't exist."
             ], 404);
         }
 

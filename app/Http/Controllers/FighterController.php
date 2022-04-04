@@ -12,9 +12,6 @@ class FighterController extends Controller
         $fighters = Fighter::all();
         return response()->json($fighters);
     }
-    public function create()
-    {
-    }
     public function store(Request $request)
     {
         $fighter = new Fighter();

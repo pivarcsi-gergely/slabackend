@@ -12,9 +12,6 @@ class CardController extends Controller
         $cards = Card::all();
         return response()->json($cards);
     }
-    public function create()
-    {
-    }
     public function store(Request $request)
     {
         $card = new Card();

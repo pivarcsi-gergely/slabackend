@@ -12,9 +12,6 @@ class EnemyController extends Controller
         $enemies = Enemy::all();
         return response()->json($enemies);
     }
-    public function create()
-    {
-    }
     public function store(Request $request)
     {
         $enemy = new Enemy();
