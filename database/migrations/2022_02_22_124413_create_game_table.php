@@ -17,10 +17,9 @@ class CreateGameTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignIdFor(Fighter::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
-            //$table->integer('userid')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            //$table->integer('fighterid')->references('id')->on('fighters')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('fighter_id')->constrained('fighters')->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

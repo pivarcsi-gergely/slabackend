@@ -11,14 +11,14 @@ class Token extends Model
     protected $table = "token";
 
     protected $fillable = [
-        'userid',
+        'user_id',
         'api_token'
     ];
 
     static function createToken(int $id): Token
     {
         return Token::create([
-            'userid' => $id,
+            'user_id' => $id,
             'api_token' => Str::random(80)
         ]);
     }

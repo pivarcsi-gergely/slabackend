@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         User::create([
             'username' => 'Startear',
             'email' => 'gergely.pivarcsi@gmail.com',
-            'password' => '',
+            'password' => Hash::make('abcdef'),
             'account_number' => 1000002,
             'remember_token' => 'bbbbb',
             'card_count' => 0,
