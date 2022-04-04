@@ -3,6 +3,9 @@
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\FighterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EnemyController;
+use App\Http\Controllers\DeckController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +27,6 @@ Route::post('/users/{id}/unban', [UserController::class, 'unbanUser']);
 Route::apiResource('/cards', CardController::class);
 Route::apiResource('/fighters', FighterController::class);
 Route::apiResource('/users', UserController::class);
+Route::apiResource('/enemy', EnemyController::class);
+Route::apiResource('/deck', DeckController::class);
+Route::apiResource('/game', GameController::class);
