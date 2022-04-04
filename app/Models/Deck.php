@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Deck extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'gameid',
-        'cardid'
+        'game_id',
+        'card_id'
     ];
 }
