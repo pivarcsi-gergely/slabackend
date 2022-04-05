@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+
     public function index()
     {
         $games = Game::all();
@@ -19,8 +20,14 @@ class GameController extends Controller
         $game->save();
         return response()->json($game, 201);
     }
-    public function show(Game $game)
+    public function show(int $id)
     {
+        $game = Game::find($id);
+        if (is_null($game)) {
+            return response()->json([
+                'message' => 'Game record not found!'
+            ], 404);
+        }
         return response()->json($game);
     }
     public function update(Request $request, Game $game)

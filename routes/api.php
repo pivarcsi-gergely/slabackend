@@ -24,9 +24,11 @@ Route::post('/users/register', [UserController::class, 'store']);
 Route::post('/users/{id}/ban', [UserController::class, 'banUser']);
 Route::post('/users/{id}/unban', [UserController::class, 'unbanUser']);
 
-Route::apiResource('/cards', CardController::class);
-Route::apiResource('/fighters', FighterController::class);
-Route::apiResource('/users', UserController::class);
-Route::apiResource('/enemy', EnemyController::class);
-Route::apiResource('/deck', DeckController::class);
-Route::apiResource('/game', GameController::class);
+Route::apiResources([
+    '/cards' => CardController::class,
+    '/fighters' => FighterController::class,
+    '/users' => UserController::class,
+    '/enemy' => EnemyController::class,
+    '/deck' => DeckController::class,
+    '/game' => GameController::class
+]);

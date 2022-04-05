@@ -17,13 +17,13 @@ class UserController extends Controller
         if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Invalid username or password!'
-            ], 404);
+            ], 400);
         }
 
         if ($user->banned == 1) {
              return response([
                 'message' => 'You are banned!'
-            ], 404);
+            ], 403);
         }
 
         Token::createToken($user->id);
@@ -92,7 +92,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return response()->json([
                 'message' => 'User not found!'
-            ]);
+            ], 404);
         }
         return response()->json($user);
     }
@@ -103,7 +103,7 @@ class UserController extends Controller
         if (is_null($id)) {
             return response()->json([
                 'message' => 'Error updating the User'
-            ]);
+            ], 404);
         }
 
         $user->fill($request->all());

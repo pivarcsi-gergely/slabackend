@@ -20,8 +20,14 @@ class DeckController extends Controller
         $deck->save();
         return response()->json($deck, 201);
     }
-    public function show(Deck $deck)
+    public function show(int $id)
     {
+        $deck = Deck::find($id);
+        if (is_null($deck)) {
+            return response()->json([
+                'message' => 'Deck not found!'
+            ], 404);
+        }
         return response()->json($deck);
     }
     public function update(Request $request, Deck $deck)

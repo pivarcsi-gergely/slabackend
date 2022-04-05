@@ -10,6 +10,7 @@ class Deck extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'game_id',
         'card_id'
     ];
