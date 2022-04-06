@@ -40,9 +40,9 @@ class UserSeeder extends Seeder
             'banned' => true,
         ]);
         User::create([
-            'username' => 'Jani061',
+            'username' => 'Istvenke',
             'email' => 'sajt.isti@gmail.com',
-            'password' => '',
+            'password' => Hash::make('istven03'),
             'account_number' => 1000003,
             'remember_token' => 'ccccc',
             'card_count' => 0,
