@@ -75,6 +75,16 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
+        if ($request->username == User::findFirst($request->username)->username) {
+            return response()->json([
+                'message' => 'This username is taken , choose another!'
+            ], 401);
+        }
+        if ($request->email == User::findFirst($request->eamil)->email) {
+            return response()->json([
+                'message' => 'This email has been registered, choose another!'
+            ], 401);
+        }
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
