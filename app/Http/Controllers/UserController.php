@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         if ($request->username == User::findFirst($request->username)->username) {
             return response()->json([
-                'message' => 'This username is taken , choose another!'
+                'message' => 'This username is taken, choose another!'
             ], 401);
         }
         if ($request->email == User::findFirst($request->eamil)->email) {
