@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $user = User::firstWhere('username', $request->username);
 
-        if (!isset($request->username) || !Hash::check($request->password, $user->password)) {
+        if (is_null($user) || !isset($request->username) || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Invalid username or password!'
             ], 400);
@@ -28,7 +28,7 @@ class UserController extends Controller
 
         Token::createToken($user->id);
 
-        return response()->json(['message' => "You've logged in"]);
+        return response()->json(['message' => "You've logged in"], 200);
     }
 
     public function banUser(int $id)
@@ -75,14 +75,14 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        if ($request->username == User::findFirst($request->username)->username) {
+        if (!is_null(User::firstWhere('username',$request->username))) {
             return response()->json([
-                'message' => 'This username is taken , choose another!'
+                'message' => 'This username is taken, please choose another!'
             ], 401);
         }
-        if ($request->email == User::findFirst($request->eamil)->email) {
+        if (!is_null(User::firstWhere('email',$request->email))) {
             return response()->json([
-                'message' => 'This email has been registered, choose another!'
+                'message' => 'This email has been registered, please choose another!'
             ], 401);
         }
         $user = User::create([
@@ -90,7 +90,6 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
 
         $user->save();
         return response()->json($user, 201);
@@ -106,13 +105,13 @@ class UserController extends Controller
         }
         return response()->json($user);
     }
-    public function update(Request $request, int $id)
+    public function update(UserRequest $request, int $id)
     {
         $user = User::find($id);
 
         if (is_null($id)) {
             return response()->json([
-                'message' => 'Error updating the User'
+                'message' => 'Error updating the user'
             ], 404);
         }
 
