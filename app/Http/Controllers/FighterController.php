@@ -25,7 +25,7 @@ class FighterController extends Controller
         if (is_null($fighter)) {
             return response()->json([
                 'message' => 'Fighter not found!'
-            ]);
+            ], 404);
         }
         return response()->json($fighter);
     }

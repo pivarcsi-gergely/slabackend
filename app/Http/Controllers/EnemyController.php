@@ -25,7 +25,7 @@ class EnemyController extends Controller
         if (is_null($enemy)) {
             return response()->json([
                 'message' => 'Enemy not found!'
-            ]);
+            ], 404);
         }
         return response()->json($enemy);
     }
