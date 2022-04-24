@@ -25,7 +25,7 @@ class CardController extends Controller
         if (is_null($card)) {
             return response()->json([
                 'message' => 'Card not found!'
-            ]);
+            ], 404);
         }
         return response()->json($card);
     }
