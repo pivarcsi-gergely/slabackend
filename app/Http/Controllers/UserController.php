@@ -105,16 +105,20 @@ class UserController extends Controller
         }
         return response()->json($user);
     }
-    public function update(UserRequest $request, int $id)
+    public function update(Request $request, int $id)
     {
         $user = User::find($id);
 
         if (is_null($id)) {
             return response()->json([
-                'message' => 'Error updating the user'
+                'message' => 'Error updating the user!'
             ], 404);
         }
-
+        if (is_null($user)) {
+            return response()->json([
+                'message' => 'User not found!'
+            ], 404);
+        }
         $user->fill($request->all());
         $user->save();
         return response()->json($user, 200);
